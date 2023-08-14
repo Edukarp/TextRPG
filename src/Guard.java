@@ -30,7 +30,7 @@ public class Guard {
 
             if(game.playerDamage < guardArmor) {
                 game.location = "talkGuard";
-                game.mainTextArea.setText("Guard: Don't be fool. \nStat back! \nYou lose 1 HP");
+                game.mainTextArea.setText("Guard: Don't be fool. \nStay back! \n\nYou lose 1 HP");
                 game.playerHP -= 1;
                 game.choice1.setText(">");
                 game.choice2.setText("");
@@ -50,7 +50,29 @@ public class Guard {
             }
         }
         else if(game.location == "attackGuard"){
-
+            if(guardHP > 0) {
+                game.location = "attackGuard";
+                game.mainTextArea.setText("Guard: You will not get away with this!! \nYou dealt " + game.playerDamage
+                        + " damage and received " + guardDamage + " damage.\n\nWhat do you do?");
+                game.playerHP -= 3;
+                guardHP -= game.playerDamage - (guardArmor - 3);
+                game.choice1.setText("Attack");
+                game.choice2.setText("Use Item");
+                game.choice3.setText("Try Run");
+                game.choice4.setText("");
+            }
+            else{
+                game.location = "deadGateGuard";
+                game.mainTextArea.setText("You kill the gate Guard, better run in before someone see you." +
+                        " \nYou gain X exp and get a warrior sword and a health potion." +
+                        " \nYou used the health potion now you hp is full restore.");
+                game.weaponLabelName.setText("Warrior Sword");
+                game.playerHP = 15;
+                game.choice1.setText("Enter the city");
+                game.choice2.setText("");
+                game.choice3.setText("");
+                game.choice4.setText("");
+            }
         }
     }
 

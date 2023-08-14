@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Game {
 
@@ -159,7 +157,7 @@ public class Game {
         locationLabelName.setForeground(Color.white);
         playerPanel.add(locationLabelName);
         */
-        tonwGate();
+        townGate();
 
     }
 
@@ -170,16 +168,42 @@ public class Game {
 
     }
 
-    public void tonwGate(){
+    public void townGate(){
         playerSetup();
         location = "townGate";
-        mainTextArea.setText("You are at the gate of the town. \nA guard is standing" +
+        mainTextArea.setText("You are at the gate of the town. \nA guard is standing " +
                 "in front of you. \n\nWhat do you do?");
 
         choice1.setText("Talk to the Guard");
         choice2.setText("Attack the Guard");
-        choice3.setText("Leave");
-        choice4.setText("");
+        choice3.setText("Intimidate the Guard");
+        choice4.setText("Leave");
+    }
+
+    public void crossRoad(){
+        playerSetup();
+        location = "crossRoad";
+        mainTextArea.setText("You turn back at a crossRoad. \nThe Tonw is at south  " +
+               "\n\nWhat do you do?");
+
+        choice1.setText("Go north");
+        choice2.setText("Go south");
+        choice3.setText("Go east");
+        choice4.setText("go west");
+    }
+
+    public void riverSiteCampfire(){ //east
+        playerSetup();
+        location = "riverSiteCampfire";
+        mainTextArea.setText("There is a river with a campfire. \nYou drink the water" +
+                " and rest at the campfire \n\n You HP is full recovered");
+
+        playerHP = 15;
+
+        choice1.setText("Go back");
+        choice2.setText("Upgrade Levels");
+        choice3.setText("Change Equipaments");
+        choice4.setText("See Stats");
     }
 
 }
