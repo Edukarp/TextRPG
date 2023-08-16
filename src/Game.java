@@ -13,10 +13,12 @@ public class Game {
     public Font normalFont = new Font("Times New Roman", Font.PLAIN, 25);
     public TitleScreenHandler tsHandler;
     public ChoiceHandler choiceHandler = new ChoiceHandler(this);
-    int playerHP = 15, playerDamage = 1;
-    String weapon = "knife";
     String location = "townGate";
     Guard guard = new Guard(this);
+    Player player = new Player(this);
+    Goblin goblin = new Goblin(this);
+    //Mudanca de senarios
+    public boolean tinyGoblinDefeat = false;
 
     public Game(){
 
@@ -162,8 +164,8 @@ public class Game {
     }
 
     public void playerSetup(){
-        weaponLabelName.setText(weapon);
-        hpLabelNumber.setText("" + playerHP);
+        weaponLabelName.setText(player.weapon);
+        hpLabelNumber.setText("" + player.Hp);
         //locationLabelName.setText(location);
 
     }
@@ -198,12 +200,25 @@ public class Game {
         mainTextArea.setText("There is a river with a campfire. \nYou drink the water" +
                 " and rest at the campfire \n\n You HP is full recovered");
 
-        playerHP = 15;
+        player.setHp(15);
 
         choice1.setText("Go back");
         choice2.setText("Upgrade Levels");
         choice3.setText("Change Equipaments");
         choice4.setText("See Stats");
+    }
+
+    public void goblinWest(){ //west
+        playerSetup();
+        if(!tinyGoblinDefeat) {
+            location = "tinyGoblinSite";
+            mainTextArea.setText("You walk a little bit and enconter a tiny goblin scream into you" +
+                    "\nYou can see a sword blocked by the goblin \n\nTime to battle!");
+            choice1.setText("Attack");
+            choice2.setText("Use Item");
+            choice3.setText("");
+            choice4.setText("");
+        }
     }
 
 }

@@ -22,16 +22,28 @@ public class Guard {
 
     }
 
+    public void setGuardHP(int guardHP) {
+        this.guardHP = guardHP;
+    }
+
+    public void setGuardDamage(int guardDamage) {
+        this.guardDamage = guardDamage;
+    }
+
+    public void setGuardArmor(int guardArmor) {
+        this.guardArmor = guardArmor;
+    }
+
     public void attack(){
         if(game.location == "townGate"){
-            guardHP = 20;
-            guardDamage = 3;
-            guardArmor = 5;
+            setGuardHP(20);
+            setGuardDamage(3);
+            setGuardArmor(5);
 
-            if(game.playerDamage < guardArmor) {
+            if(game.player.damage < guardArmor) {
                 game.location = "talkGuard";
                 game.mainTextArea.setText("Guard: Don't be fool. \nStay back! \n\nYou lose 1 HP");
-                game.playerHP -= 1;
+                game.player.setHp(game.player.Hp -= 1);
                 game.choice1.setText(">");
                 game.choice2.setText("");
                 game.choice3.setText("");
@@ -39,10 +51,10 @@ public class Guard {
             }
             else{
                 game.location = "attackGuard";
-                game.mainTextArea.setText("Guard: You will not get away with this!! \nYou dealt " + game.playerDamage
+                game.mainTextArea.setText("Guard: You will not get away with this!! \nYou dealt " + (guardArmor + game.player.damage)
                 + " damage and received " + guardDamage + " damage.\n\nWhat do you do?");
-                game.playerHP -= 3;
-                guardHP -= game.playerDamage - (guardArmor - 3);
+                game.player.setHp(game.player.Hp - guardDamage);
+                setGuardHP(guardHP - (guardArmor - game.player.damage));
                 game.choice1.setText("Attack");
                 game.choice2.setText("Use Item");
                 game.choice3.setText("Try Run");
@@ -52,10 +64,10 @@ public class Guard {
         else if(game.location == "attackGuard"){
             if(guardHP > 0) {
                 game.location = "attackGuard";
-                game.mainTextArea.setText("Guard: You will not get away with this!! \nYou dealt " + game.playerDamage
+                game.mainTextArea.setText("Guard: You will not get away with this!! \nYou dealt " + (guardArmor + game.player.damage)
                         + " damage and received " + guardDamage + " damage.\n\nWhat do you do?");
-                game.playerHP -= 3;
-                guardHP -= game.playerDamage - (guardArmor - 3);
+                setGuardHP(guardHP - (guardArmor - game.player.damage));
+                game.player.setHp(game.player.Hp - guardDamage);
                 game.choice1.setText("Attack");
                 game.choice2.setText("Use Item");
                 game.choice3.setText("Try Run");
@@ -67,7 +79,7 @@ public class Guard {
                         " \nYou gain X exp and get a warrior sword and a health potion." +
                         " \nYou used the health potion now you hp is full restore.");
                 game.weaponLabelName.setText("Warrior Sword");
-                game.playerHP = 15;
+                game.player.setHp(15);
                 game.choice1.setText("Enter the city");
                 game.choice2.setText("");
                 game.choice3.setText("");
